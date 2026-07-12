@@ -77,3 +77,37 @@ body{
 .btn:hover{
     background:#ff6a00;
 }
+.tournaments{
+    padding:80px 8%;
+    text-align:center;
+    background:#181818;
+}
+
+.tournaments h2{
+    color:#ff3c00;
+    margin-bottom:40px;
+}
+
+.card-container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#222;
+    padding:25px;
+    width:300px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(255,60,0,.3);
+}
+
+.card h3{
+    color:#ff3c00;
+    margin-bottom:15px;
+}
+
+.card p{
+    margin:10px 0;
+}
