@@ -3,57 +3,68 @@ import { db } from "./firebase.js";
 import {
   collection,
   addDoc,
-  getDocs
+  getDocs,
+  deleteDoc,
+  doc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const tournamentForm = document.getElementById("tournamentForm");
 const tableBody = document.getElementById("tableBody");
 
-// Save tournament
+// Create Tournament
 tournamentForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const title = document.getElementById("title").value;
-    const date = document.getElementById("date").value;
-    const entryFee = document.getElementById("entryFee").value;
-    const prizePool = document.getElementById("prizePool").value;
+  const title = document.getElementById("title").value;
+  const date = document.getElementById("date").value;
+  const entryFee = document.getElementById("entryFee").value;
+  const prizePool = document.getElementById("prizePool").value;
 
-    try {
-        await addDoc(collection(db, "tournaments"), {
-            title,
-            date,
-            entryFee,
-            prizePool
-        });
+  await addDoc(collection(db, "tournaments"), {
+    title,
+    date,
+    entryFee,
+    prizePool
+  });
 
-        alert("Tournament Created Successfully!");
+  alert("Tournament Created Successfully!");
+  tournamentForm.reset();
 
-        tournamentForm.reset();
-
-    } catch (error) {
-        alert(error.message);
-    }
+  loadTournaments();
 });
 
-// Load registered teams
-async function loadTeams() {
-    const querySnapshot = await getDocs(collection(db, "registrations"));
+// Load Tournaments
+async function loadTournaments() {
+  tableBody.innerHTML = "";
 
-    tableBody.innerHTML = "";
+  const querySnapshot = await getDocs(collection(db, "tournaments"));
 
-    querySnapshot.forEach((doc) => {
-        const team = doc.data();
+  querySnapshot.forEach((document) => {
+    const t = document.data();
 
-        tableBody.innerHTML += `
-        <tr>
-            <td>${team.teamName}</td>
-            <td>${team.captainName}</td>
-            <td>${team.captainUID}</td>
-            <td>${team.mobile}</td>
-            <td>${team.email}</td>
-        </tr>
-        `;
-    });
+    tableBody.innerHTML += `
+      <tr>
+        <td>${t.title}</td>
+        <td>${t.date}</td>
+        <td>₹${t.entryFee}</td>
+        <td>₹${t.prizePool}</td>
+        <td>
+          <button onclick="deleteTournament('${document.id}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `;
+  });
 }
 
-loadTeams();
+// Delete Tournament
+window.deleteTournament = async function(id) {
+  if (confirm("Delete this tournament?")) {
+    await deleteDoc(doc(db, "tournaments", id));
+    alert("Tournament Deleted!");
+    loadTournaments();
+  }
+};
+
+loadTournaments();
