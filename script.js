@@ -2,7 +2,8 @@ import { db } from "./firebase.js";
 
 import {
   collection,
-  addDoc
+  addDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const form = document.getElementById("registerForm");
@@ -18,13 +19,14 @@ form.addEventListener("submit", async (e) => {
 
     try {
         await addDoc(collection(db, "registrations"), {
-            teamName,
-            captainName,
-            captainUID,
-            mobile,
-            email,
-            createdAt: new Date()
-        });
+    teamName,
+    captainName,
+    captainUID,
+    mobile,
+    email,
+    status: "Pending",
+    createdAt: serverTimestamp()
+});
 
         alert("✅ Registration Successful!");
 
