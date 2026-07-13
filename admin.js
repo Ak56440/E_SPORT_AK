@@ -5,34 +5,55 @@ import {
   addDoc,
   getDocs,
   deleteDoc,
-  doc
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 const tournamentForm = document.getElementById("tournamentForm");
 const tableBody = document.getElementById("tableBody");
 
 // Create Tournament
 tournamentForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const title = document.getElementById("title").value;
-  const date = document.getElementById("date").value;
-  const entryFee = document.getElementById("entryFee").value;
-  const prizePool = document.getElementById("prizePool").value;
+    const title = document.getElementById("title").value;
+    const date = document.getElementById("date").value;
+    const entryFee = document.getElementById("entryFee").value;
+    const prizePool = document.getElementById("prizePool").value;
 
-  await addDoc(collection(db, "tournaments"), {
-    title,
-    date,
-    entryFee,
-    prizePool
-  });
+    try {
 
-  alert("Tournament Created Successfully!");
-  tournamentForm.reset();
+        if (window.editId) {
 
-  loadTournaments();
+            await updateDoc(doc(db, "tournaments", window.editId), {
+                title,
+                date,
+                entryFee,
+                prizePool
+            });
+
+            alert("Tournament Updated!");
+
+            window.editId = null;
+
+        } else {
+
+            await addDoc(collection(db, "tournaments"), {
+                title,
+                date,
+                entryFee,
+                prizePool
+            });
+
+            alert("Tournament Created Successfully!");
+        }
+
+        tournamentForm.reset();
+        loadTournaments();
+
+    } catch (error) {
+        alert(error.message);
+    }
 });
-
 // Load Tournaments
 async function loadTournaments() {
   tableBody.innerHTML = "";
@@ -48,11 +69,15 @@ async function loadTournaments() {
         <td>${t.date}</td>
         <td>₹${t.entryFee}</td>
         <td>₹${t.prizePool}</td>
-        <td>
-          <button onclick="deleteTournament('${document.id}')">
-            Delete
-          </button>
-        </td>
+       <td>
+  <button onclick="editTournament('${document.id}','${t.title}','${t.date}','${t.entryFee}','${t.prizePool}')">
+    Edit
+  </button>
+
+  <button onclick="deleteTournament('${document.id}')">
+    Delete
+  </button>
+</td>
       </tr>
     `;
   });
@@ -65,6 +90,15 @@ window.deleteTournament = async function(id) {
     alert("Tournament Deleted!");
     loadTournaments();
   }
+};
+window.editTournament = async function(id, title, date, entryFee, prizePool) {
+
+    document.getElementById("title").value = title;
+    document.getElementById("date").value = date;
+    document.getElementById("entryFee").value = entryFee;
+    document.getElementById("prizePool").value = prizePool;
+
+    window.editId = id;
 };
 
 loadTournaments();
