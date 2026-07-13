@@ -70,9 +70,10 @@ async function loadTournaments() {
         <td>₹${t.entryFee}</td>
         <td>₹${t.prizePool}</td>
        <td>
-  <button onclick="editTournament('${document.id}','${t.title}','${t.date}','${t.entryFee}','${t.prizePool}')">
-    Edit
-  </button>
+ <button style="background:green;color:white;padding:8px 15px;"
+onclick="editTournament('${document.id}','${t.title}','${t.date}','${t.entryFee}','${t.prizePool}')">
+    ✏️ Edit
+</button>
 
   <button onclick="deleteTournament('${document.id}')">
     Delete
