@@ -1,5 +1,4 @@
 import { db } from "./firebase.js";
-
 import {
   collection,
   getDocs
@@ -8,26 +7,34 @@ import {
 const tournamentList = document.getElementById("tournamentList");
 
 async function loadTournaments() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "tournaments"));
 
     tournamentList.innerHTML = "";
 
-    const querySnapshot = await getDocs(collection(db, "tournaments"));
+    if (querySnapshot.empty) {
+      tournamentList.innerHTML = "<h3>No tournaments found.</h3>";
+      return;
+    }
 
     querySnapshot.forEach((doc) => {
+      const t = doc.data();
 
-        const tournament = doc.data();
-
-        tournamentList.innerHTML += `
+      tournamentList.innerHTML += `
         <div class="card">
-            <h3>${tournament.title}</h3>
-            <p>📅 Date: ${tournament.date}</p>
-            <p>💰 Prize Pool: ₹${tournament.prizePool}</p>
-            <p>🎟 Entry Fee: ₹${tournament.entryFee}</p>
-            <a href="register.html" class="btn">Join Tournament</a>
+          <h3>${t.title}</h3>
+          <p>📅 ${t.date}</p>
+          <p>💰 Prize: ₹${t.prizePool}</p>
+          <p>🎟 Entry: ₹${t.entryFee}</p>
+          <a href="register.html" class="btn">Join Tournament</a>
         </div>
-        `;
+      `;
     });
 
+  } catch (error) {
+    console.error(error);
+    tournamentList.innerHTML = `<p>Error: ${error.message}</p>`;
+  }
 }
 
 loadTournaments();
