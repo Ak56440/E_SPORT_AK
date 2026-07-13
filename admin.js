@@ -8,10 +8,13 @@ import {
   doc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 const tournamentForm = document.getElementById("tournamentForm");
 const tableBody = document.getElementById("tableBody");
+const registrationTable = document.getElementById("registrationTable");
 
-// Create Tournament
+// ---------------- CREATE / UPDATE TOURNAMENT ----------------
+
 tournamentForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -32,7 +35,6 @@ tournamentForm.addEventListener("submit", async (e) => {
             });
 
             alert("Tournament Updated!");
-
             window.editId = null;
 
         } else {
@@ -44,7 +46,7 @@ tournamentForm.addEventListener("submit", async (e) => {
                 prizePool
             });
 
-            alert("Tournament Created Successfully!");
+            alert("Tournament Created!");
         }
 
         tournamentForm.reset();
@@ -54,45 +56,59 @@ tournamentForm.addEventListener("submit", async (e) => {
         alert(error.message);
     }
 });
-// Load Tournaments
+
+// ---------------- LOAD TOURNAMENTS ----------------
+
 async function loadTournaments() {
-  tableBody.innerHTML = "";
 
-  const querySnapshot = await getDocs(collection(db, "tournaments"));
+    tableBody.innerHTML = "";
 
-  querySnapshot.forEach((document) => {
-    const t = document.data();
+    const querySnapshot = await getDocs(collection(db, "tournaments"));
 
-    tableBody.innerHTML += `
-      <tr>
-        <td>${t.title}</td>
-        <td>${t.date}</td>
-        <td>₹${t.entryFee}</td>
-        <td>₹${t.prizePool}</td>
-       <td>
- <button style="background:green;color:white;padding:8px 15px;"
-onclick="editTournament('${document.id}','${t.title}','${t.date}','${t.entryFee}','${t.prizePool}')">
-    ✏️ Edit
-</button>
+    querySnapshot.forEach((document) => {
 
-  <button onclick="deleteTournament('${document.id}')">
-    Delete
-  </button>
-</td>
-      </tr>
-    `;
-  });
+        const t = document.data();
+
+        tableBody.innerHTML += `
+        <tr>
+            <td>${t.title}</td>
+            <td>${t.date}</td>
+            <td>₹${t.entryFee}</td>
+            <td>₹${t.prizePool}</td>
+
+            <td>
+                <button style="background:green;color:white"
+                onclick="editTournament('${document.id}','${t.title}','${t.date}','${t.entryFee}','${t.prizePool}')">
+                Edit
+                </button>
+
+                <button
+                onclick="deleteTournament('${document.id}')">
+                Delete
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+
 }
 
-// Delete Tournament
-window.deleteTournament = async function(id) {
-  if (confirm("Delete this tournament?")) {
-    await deleteDoc(doc(db, "tournaments", id));
-    alert("Tournament Deleted!");
-    loadTournaments();
-  }
-};
-window.editTournament = async function(id, title, date, entryFee, prizePool) {
+// ---------------- DELETE ----------------
+
+window.deleteTournament = async function(id){
+
+    if(confirm("Delete Tournament?")){
+
+        await deleteDoc(doc(db,"tournaments",id));
+
+        loadTournaments();
+    }
+
+}
+
+// ---------------- EDIT ----------------
+
+window.editTournament = function(id,title,date,entryFee,prizePool){
 
     document.getElementById("title").value = title;
     document.getElementById("date").value = date;
@@ -100,6 +116,84 @@ window.editTournament = async function(id, title, date, entryFee, prizePool) {
     document.getElementById("prizePool").value = prizePool;
 
     window.editId = id;
-};
+
+}
+
+// ---------------- LOAD REGISTRATIONS ----------------
+
+async function loadRegistrations(){
+
+    registrationTable.innerHTML="";
+
+    const querySnapshot = await getDocs(collection(db,"registrations"));
+
+    querySnapshot.forEach((document)=>{
+
+        const team=document.data();
+
+        registrationTable.innerHTML+=`
+
+        <tr>
+
+        <td>${team.teamName}</td>
+
+        <td>${team.captainName}</td>
+
+        <td>${team.captainUID}</td>
+
+        <td>${team.mobile}</td>
+
+        <td>${team.email}</td>
+
+        <td>${team.status}</td>
+
+        <td>
+
+        <button onclick="approveTeam('${document.id}')">
+        ✅ Approve
+        </button>
+
+        <button onclick="rejectTeam('${document.id}')">
+        ❌ Reject
+        </button>
+
+        </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+// ---------------- APPROVE ----------------
+
+window.approveTeam = async function(id){
+
+    await updateDoc(doc(db,"registrations",id),{
+
+        status:"Approved"
+
+    });
+
+    loadRegistrations();
+
+}
+
+// ---------------- REJECT ----------------
+
+window.rejectTeam = async function(id){
+
+    await updateDoc(doc(db,"registrations",id),{
+
+        status:"Rejected"
+
+    });
+
+    loadRegistrations();
+
+}
 
 loadTournaments();
+loadRegistrations();
