@@ -22,6 +22,8 @@ tournamentForm.addEventListener("submit", async (e) => {
     const date = document.getElementById("date").value;
     const entryFee = document.getElementById("entryFee").value;
     const prizePool = document.getElementById("prizePool").value;
+    const roomId = document.getElementById("roomId").value;
+    const roomPassword = document.getElementById("roomPassword").value;
 
     try {
 
@@ -31,7 +33,9 @@ tournamentForm.addEventListener("submit", async (e) => {
                 title,
                 date,
                 entryFee,
-                prizePool
+                prizePool,
+                roomId,
+                roomPassword
             });
 
             alert("Tournament Updated!");
@@ -43,7 +47,9 @@ tournamentForm.addEventListener("submit", async (e) => {
                 title,
                 date,
                 entryFee,
-                prizePool
+                prizePool,
+                roomId,
+                roomPassword
             });
 
             alert("Tournament Created!");
@@ -77,18 +83,29 @@ async function loadTournaments() {
             <td>₹${t.prizePool}</td>
 
             <td>
+
                 <button style="background:green;color:white"
-                onclick="editTournament('${document.id}','${t.title}','${t.date}','${t.entryFee}','${t.prizePool}')">
-                Edit
+                onclick="editTournament(
+                '${document.id}',
+                '${t.title}',
+                '${t.date}',
+                '${t.entryFee}',
+                '${t.prizePool}',
+                '${t.roomId || ""}',
+                '${t.roomPassword || ""}'
+                )">
+                ✏️ Edit
                 </button>
 
-                <button
-                onclick="deleteTournament('${document.id}')">
-                Delete
+                <button onclick="deleteTournament('${document.id}')">
+                🗑 Delete
                 </button>
+
             </td>
+
         </tr>
         `;
+
     });
 
 }
@@ -108,12 +125,22 @@ window.deleteTournament = async function(id){
 
 // ---------------- EDIT ----------------
 
-window.editTournament = function(id,title,date,entryFee,prizePool){
+window.editTournament = function(
+id,
+title,
+date,
+entryFee,
+prizePool,
+roomId="",
+roomPassword=""
+){
 
     document.getElementById("title").value = title;
     document.getElementById("date").value = date;
     document.getElementById("entryFee").value = entryFee;
     document.getElementById("prizePool").value = prizePool;
+    document.getElementById("roomId").value = roomId;
+    document.getElementById("roomPassword").value = roomPassword;
 
     window.editId = id;
 
@@ -136,15 +163,10 @@ async function loadRegistrations(){
         <tr>
 
         <td>${team.teamName}</td>
-
         <td>${team.captainName}</td>
-
         <td>${team.captainUID}</td>
-
         <td>${team.mobile}</td>
-
         <td>${team.email}</td>
-
         <td>${team.status}</td>
 
         <td>
