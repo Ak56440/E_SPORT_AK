@@ -4,7 +4,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyC0D2V2ILEWeJ9wRSMYMVXlMjAxYsEYY6M",
   authDomain: "ffturnaments-890b3.firebaseapp.com",
   projectId: "ffturnaments-890b3",
   storageBucket: "ffturnaments-890b3.firebasestorage.app",
