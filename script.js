@@ -16,17 +16,20 @@ form.addEventListener("submit", async (e) => {
     const captainUID = document.getElementById("captainUID").value;
     const mobile = document.getElementById("mobile").value;
     const email = document.getElementById("email").value;
+    const tournamentTitle = document.getElementById("tournamentTitle").value;
 
     try {
+
         await addDoc(collection(db, "registrations"), {
-    teamName,
-    captainName,
-    captainUID,
-    mobile,
-    email,
-    status: "Pending",
-    createdAt: serverTimestamp()
-});
+            teamName,
+            captainName,
+            captainUID,
+            mobile,
+            email,
+            tournamentTitle,
+            status: "Pending",
+            createdAt: serverTimestamp()
+        });
 
         alert("✅ Registration Successful!");
 
