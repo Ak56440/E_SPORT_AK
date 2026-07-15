@@ -1,30 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="form-container">
 
-    <h1>🎮 Player Dashboard</h1>
+<h1>🎮 Player Dashboard</h1>
 
-    <div id="playerInfo">
-        <h2>👤 My Profile</h2>
-        <p><strong>Name:</strong> <span id="playerName">Loading...</span></p>
-        <p><strong>Email:</strong> <span id="playerEmail">Loading...</span></p>
-    </div>
+<!-- Profile -->
+<div class="card">
 
-    <hr>
+<h2>👤 My Profile</h2>
 
-    <h2>🏆 My Tournament</h2>
+<p><b>Name:</b> <span id="playerName">Loading...</span></p>
 
-    <div id="myTournament">
-        Loading tournament...
-    </div>
+<p><b>Email:</b> <span id="playerEmail">Loading...</span></p>
+
+</div>
+
+<hr>
+
+<!-- Tournament -->
+<div class="card">
+
+<h2>🏆 My Tournament</h2>
+
+<p><b>Tournament:</b> <span id="tournamentName">Loading...</span></p>
+
+<p><b>Status:</b> <span id="status">Pending</span></p>
+
+<p><b>Room ID:</b> <span id="roomId">Waiting for approval</span></p>
+
+<p><b>Room Password:</b> <span id="roomPassword">Waiting for approval</span></p>
+
+</div>
+
+<hr>
+
+<!-- Match Result -->
+<div class="card">
+
+<h2>🏅 Match Result</h2>
+
+<p><b>Kills:</b> <span id="kills">0</span></p>
+
+<p><b>Rank:</b> <span id="rank">-</span></p>
+
+<p><b>Total Points:</b> <span id="points">0</span></p>
+
+</div>
+
+<hr>
+
+<!-- Leaderboard -->
+<div class="card">
+
+<h2>🥇 Leaderboard</h2>
+
+<table border="1" width="100%" cellpadding="8">
+
+<thead>
+
+<tr>
+
+<th>Rank</th>
+
+<th>Team</th>
+
+<th>Points</th>
+
+</tr>
+
+</thead>
+
+<tbody id="leaderboardTable">
+
+<tr>
+
+<td colspan="3">Loading...</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<br>
+
+<button onclick="location.href='index.html'">
+🏠 Home
+</button>
+
+<button onclick="logout()">
+🚪 Logout
+</button>
 
 </div>
 
