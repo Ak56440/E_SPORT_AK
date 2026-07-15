@@ -295,3 +295,79 @@ if (logoutBtn) {
     });
 
 }
+// ================= LEADERBOARD =================
+
+// Save Leaderboard
+leaderboardForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const teamName = document.getElementById("lbTeamName").value;
+    const kills = Number(document.getElementById("lbKills").value);
+    const rank = Number(document.getElementById("lbRank").value);
+    const points = Number(document.getElementById("lbPoints").value);
+
+    await addDoc(collection(db, "leaderboard"), {
+        teamName,
+        kills,
+        rank,
+        points
+    });
+
+    alert("✅ Leaderboard Saved!");
+
+    leaderboardForm.reset();
+
+    loadLeaderboard();
+
+});
+
+// Load Leaderboard
+async function loadLeaderboard() {
+
+    leaderboardAdminTable.innerHTML = "";
+
+    const snapshot = await getDocs(collection(db, "leaderboard"));
+
+    snapshot.forEach((document) => {
+
+        const data = document.data();
+
+        leaderboardAdminTable.innerHTML += `
+        <tr>
+
+            <td>${data.teamName}</td>
+
+            <td>${data.kills}</td>
+
+            <td>${data.rank}</td>
+
+            <td>${data.points}</td>
+
+            <td>
+                <button onclick="deleteLeaderboard('${document.id}')">
+                🗑 Delete
+                </button>
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
+
+// Delete Leaderboard
+window.deleteLeaderboard = async function(id){
+
+    if(confirm("Delete Team?")){
+
+        await deleteDoc(doc(db,"leaderboard",id));
+
+        loadLeaderboard();
+
+    }
+
+}
+
+loadLeaderboard();
