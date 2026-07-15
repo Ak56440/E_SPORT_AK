@@ -40,6 +40,8 @@ import {
 const tournamentForm = document.getElementById("tournamentForm");
 const tableBody = document.getElementById("tableBody");
 const registrationTable = document.getElementById("registrationTable");
+const leaderboardForm = document.getElementById("leaderboardForm");
+const leaderboardAdminTable = document.getElementById("leaderboardAdminTable");
 
 // ---------------- CREATE / UPDATE TOURNAMENT ----------------
 
