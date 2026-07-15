@@ -158,33 +158,43 @@ async function loadRegistrations(){
 
         const team=document.data();
 
-        registrationTable.innerHTML+=`
+       registrationTable.innerHTML += `
 
-        <tr>
+<tr>
 
-        <td>${team.teamName}</td>
-        <td>${team.captainName}</td>
-        <td>${team.captainUID}</td>
-        <td>${team.mobile}</td>
-        <td>${team.email}</td>
-        <td>${team.status}</td>
+    <td>${team.teamName}</td>
 
-        <td>
+    <td>${team.captainName}</td>
+
+    <td>${team.tournamentTitle || "-"}</td>
+
+    <td>${team.transactionId || "-"}</td>
+
+    <td>
+        ${
+            team.paymentLink
+            ? `<a href="${team.paymentLink}" target="_blank">📷 View Screenshot</a>`
+            : "No Screenshot"
+        }
+    </td>
+
+    <td>${team.status}</td>
+
+    <td>
 
         <button onclick="approveTeam('${document.id}')">
-        ✅ Approve
+            ✅ Approve
         </button>
 
         <button onclick="rejectTeam('${document.id}')">
-        ❌ Reject
+            ❌ Reject
         </button>
 
-        </td>
+    </td>
 
-        </tr>
+</tr>
 
-        `;
-
+`;
     });
 
 }
