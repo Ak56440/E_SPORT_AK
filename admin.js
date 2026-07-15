@@ -8,7 +8,7 @@ import {
 import { db } from "./firebase.js";
 
 // 🔐 Replace with your Firebase admin email
-const ADMIN_EMAIL = "your-email@gmail.com";
+const ADMIN_EMAIL = "omkardsupe143644@gmail.com";
 
 onAuthStateChanged(auth, async (user) => {
 
@@ -23,7 +23,7 @@ onAuthStateChanged(auth, async (user) => {
 
         await signOut(auth);
 
-        window.location.href = "omkardsupe143644@gmail.com";
+        window.location.href = "admin-login.html";
         return;
     }
 
