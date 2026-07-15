@@ -9,6 +9,7 @@
 <body>
 
 <div class="form-container">
+
     <h1>🏆 Team Registration</h1>
 
     <form id="registerForm">
@@ -28,6 +29,16 @@
             <option value="Squad Tournament">Squad Tournament</option>
             <option value="Duo Tournament">Duo Tournament</option>
         </select>
+
+        <input type="text"
+               id="transactionId"
+               placeholder="UPI Transaction ID"
+               required>
+
+        <input type="url"
+               id="paymentLink"
+               placeholder="Payment Screenshot Link (Google Drive / ImgBB)"
+               required>
 
         <button type="submit">Register Team</button>
 
