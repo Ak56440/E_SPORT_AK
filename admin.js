@@ -23,7 +23,7 @@ onAuthStateChanged(auth, async (user) => {
 
         await signOut(auth);
 
-        window.location.href = "admin-login.html";
+        window.location.href = "omkardsupe143644@gmail.com";
         return;
     }
 
