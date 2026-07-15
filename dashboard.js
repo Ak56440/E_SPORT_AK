@@ -25,4 +25,60 @@ onAuthStateChanged(auth, async (user) => {
 
     const snapshot = await getDocs(collection(db, "registrations"));
 
-    snapshot
+    let found = false;
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        if (data.email === user.email) {
+
+            found = true;
+
+            document.getElementById("tournamentName").textContent =
+                data.tournamentTitle || "-";
+
+            document.getElementById("status").textContent =
+                data.status || "Pending";
+
+            document.getElementById("roomId").textContent =
+                data.roomId || "Waiting for approval";
+
+            document.getElementById("roomPassword").textContent =
+                data.roomPassword || "Waiting for approval";
+
+            document.getElementById("kills").textContent =
+                data.kills || 0;
+
+            document.getElementById("rank").textContent =
+                data.rank || "-";
+
+            document.getElementById("points").textContent =
+                data.points || 0;
+        }
+
+    });
+
+    if (!found) {
+
+        document.getElementById("tournamentName").textContent = "No Tournament Registered";
+        document.getElementById("status").textContent = "-";
+        document.getElementById("roomId").textContent = "-";
+        document.getElementById("roomPassword").textContent = "-";
+
+    }
+
+});
+
+// Logout
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+
+        await signOut(auth);
+
+        window.location.href = "player-login.html";
+
+    });
+}
