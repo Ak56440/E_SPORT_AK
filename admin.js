@@ -4,11 +4,27 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 import { db } from "./firebase.js";
-onAuthStateChanged(auth, (user) => {
+
+// 🔐 Replace with your Firebase admin email
+const ADMIN_EMAIL = "your-email@gmail.com";
+
+onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
         window.location.href = "admin-login.html";
+        return;
+    }
+
+    if (user.email !== ADMIN_EMAIL) {
+
+        alert("❌ Access Denied!");
+
+        await signOut(auth);
+
+        window.location.href = "admin-login.html";
+        return;
     }
 
 });
@@ -251,3 +267,28 @@ window.rejectTeam = async function(id){
 
 loadTournaments();
 loadRegistrations();
+// ---------------- LOGOUT ----------------
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", async () => {
+
+        try {
+
+            await signOut(auth);
+
+            alert("✅ Logged out successfully!");
+
+            window.location.href = "admin-login.html";
+
+        } catch (error) {
+
+            alert(error.message);
+
+        }
+
+    });
+
+}
