@@ -17,18 +17,27 @@ form.addEventListener("submit", async (e) => {
     const mobile = document.getElementById("mobile").value;
     const email = document.getElementById("email").value;
     const tournamentTitle = document.getElementById("tournamentTitle").value;
+    const transactionId = document.getElementById("transactionId").value;
+    const paymentLink = document.getElementById("paymentLink").value;
 
     try {
 
         await addDoc(collection(db, "registrations"), {
+
             teamName,
             captainName,
             captainUID,
             mobile,
             email,
             tournamentTitle,
+
+            transactionId,
+            paymentLink,
+
             status: "Pending",
+
             createdAt: serverTimestamp()
+
         });
 
         alert("✅ Registration Successful!");
@@ -36,6 +45,8 @@ form.addEventListener("submit", async (e) => {
         form.reset();
 
     } catch (error) {
+
         alert("❌ Error: " + error.message);
+
     }
 });
