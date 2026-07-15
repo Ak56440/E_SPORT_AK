@@ -203,11 +203,21 @@ async function loadRegistrations(){
 
 window.approveTeam = async function(id){
 
+    const roomId = prompt("Enter Room ID:");
+    if (roomId === null) return;
+
+    const roomPassword = prompt("Enter Room Password:");
+    if (roomPassword === null) return;
+
     await updateDoc(doc(db,"registrations",id),{
 
-        status:"Approved"
+        status: "Approved",
+        roomId: roomId,
+        roomPassword: roomPassword
 
     });
+
+    alert("✅ Team Approved Successfully!");
 
     loadRegistrations();
 
