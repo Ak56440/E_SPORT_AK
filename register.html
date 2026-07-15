@@ -30,21 +30,44 @@
             <option value="Duo Tournament">Duo Tournament</option>
         </select>
 
-        <input type="text"
-               id="transactionId"
-               placeholder="UPI Transaction ID"
-               required>
+        <hr>
 
-        <button type="button"
+        <h3>💳 Payment Details</h3>
+
+        <p><b>Entry Fee:</b> ₹120</p>
+
+        <img src="images/upi-qr.png"
+             alt="UPI QR Code"
+             width="220">
+
+        <p><b>UPI ID:</b> yourupi@okaxis</p>
+
+        <input
+            type="text"
+            id="transactionId"
+            placeholder="Enter UPI Transaction ID"
+            required>
+
+        <button
+            type="button"
             onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSdn30HOGmouzORwFkoq7ZTLUipnU4zpbR6LorJlB8-sYepxTg/viewform?usp=header','_blank')">
             📸 Upload Payment Screenshot
         </button>
 
-        <p style="font-size:14px;color:red;">
-            After uploading the screenshot in Google Form, come back here and complete your registration.
+        <p style="color:red;font-size:14px;">
+            Upload your payment screenshot in the Google Form, then return here and complete your registration.
         </p>
 
-        <button type="submit">✅ Register Team</button>
+        <label>
+            <input type="checkbox" id="paymentDone" required>
+            I have uploaded my payment screenshot.
+        </label>
+
+        <br><br>
+
+        <button type="submit">
+            ✅ Register Team
+        </button>
 
     </form>
 
