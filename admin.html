@@ -1,78 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<hr>
 
-<div class="form-container">
+<h2>👥 Team Registrations</h2>
 
-    <h1>🏆 Admin Panel</h1>
+<table border="1" width="100%" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Team</th>
+            <th>Captain</th>
+            <th>Tournament</th>
+            <th>Transaction ID</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
-    <h2>Create Tournament</h2>
-
-    <form id="tournamentForm">
-
-        <input type="text" id="title" placeholder="Tournament Title" required>
-
-        <input type="date" id="date" required>
-
-        <input type="number" id="entryFee" placeholder="Entry Fee (₹)" required>
-
-        <input type="number" id="prizePool" placeholder="Prize Pool (₹)" required>
-
-        <!-- New Fields -->
-        <input type="text" id="roomId" placeholder="Room ID">
-
-        <input type="text" id="roomPassword" placeholder="Room Password">
-
-        <button type="submit">Create Tournament</button>
-
-    </form>
-
-    <hr>
-
-    <h2>🏆 Tournament List</h2>
-
-    <table border="1" width="100%" cellpadding="10">
-        <thead>
-            <tr>
-                <th>Tournament</th>
-                <th>Date</th>
-                <th>Entry Fee</th>
-                <th>Prize Pool</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody id="tableBody">
-        </tbody>
-    </table>
-
-    <hr>
-
-    <h2>👥 Team Registrations</h2>
-
-    <table border="1" width="100%" cellpadding="10">
-        <thead>
-            <tr>
-                <th>Team</th>
-                <th>Captain</th>
-                <th>UID</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody id="registrationTable">
-        </tbody>
-    </table>
+    <tbody id="registrationTable">
+    </tbody>
+</table>
 
 </div>
 
 <script type="module" src="admin.js"></script>
+
+</body>
+</html>
