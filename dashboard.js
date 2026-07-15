@@ -1,101 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player Dashboard</title>
-<link rel="stylesheet" href="style.css">
-</head>
+import { db } from "./firebase.js";
 
-<body>
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-<div class="form-container">
+async function loadDashboard() {
 
-<h1>🎮 Player Dashboard</h1>
+    const email = prompt("Enter your registered email");
 
-<!-- Profile -->
-<div class="card">
+    if (!email) {
+        alert("Email is required.");
+        return;
+    }
 
-<h2>👤 My Profile</h2>
+    const snapshot = await getDocs(collection(db, "registrations"));
 
-<p><b>Name:</b> <span id="playerName">Loading...</span></p>
+    let found = false;
 
-<p><b>Email:</b> <span id="playerEmail">Loading...</span></p>
+    snapshot.forEach((doc) => {
 
-</div>
+        const data = doc.data();
 
-<hr>
+        if (data.email === email) {
 
-<!-- Tournament -->
-<div class="card">
+            found = true;
 
-<h2>🏆 My Tournament</h2>
+            document.getElementById("playerName").textContent = data.captainName;
+            document.getElementById("playerEmail").textContent = data.email;
+            document.getElementById("tournamentName").textContent = data.tournamentTitle;
+            document.getElementById("status").textContent = data.status;
 
-<p><b>Tournament:</b> <span id="tournamentName">Loading...</span></p>
+            if (data.status === "Approved") {
 
-<p><b>Status:</b> <span id="status">Pending</span></p>
+                document.getElementById("roomId").textContent = data.roomId || "Not Assigned";
+                document.getElementById("roomPassword").textContent = data.roomPassword || "Not Assigned";
 
-<p><b>Room ID:</b> <span id="roomId">Waiting for approval</span></p>
+            } else {
 
-<p><b>Room Password:</b> <span id="roomPassword">Waiting for approval</span></p>
+                document.getElementById("roomId").textContent = "Waiting for approval";
+                document.getElementById("roomPassword").textContent = "Waiting for approval";
 
-</div>
+            }
+        }
 
-<hr>
+    });
 
-<!-- Match Result -->
-<div class="card">
+    if (!found) {
+        alert("No registration found for this email.");
+    }
 
-<h2>🏅 Match Result</h2>
+}
 
-<p><b>Kills:</b> <span id="kills">0</span></p>
+loadDashboard();
 
-<p><b>Rank:</b> <span id="rank">-</span></p>
-
-<p><b>Total Points:</b> <span id="points">0</span></p>
-
-</div>
-
-<hr>
-
-<!-- Leaderboard -->
-<div class="card">
-
-<h2>🥇 Leaderboard</h2>
-
-<table border="1" width="100%" cellpadding="8">
-
-<thead>
-<tr>
-<th>Rank</th>
-<th>Team</th>
-<th>Points</th>
-</tr>
-</thead>
-
-<tbody id="leaderboardTable">
-<tr>
-<td colspan="3">Loading...</td>
-</tr>
-</tbody>
-
-</table>
-
-</div>
-
-<br>
-
-<button onclick="location.href='index.html'">
-🏠 Home
-</button>
-
-<button id="logoutBtn">
-🚪 Logout
-</button>
-
-</div>
-
-<script type="module" src="dashboard.js"></script>
-
-</body>
-</html>
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    location.href = "index.html";
+});
