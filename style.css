@@ -296,3 +296,33 @@ color:#bbb;
         box-shadow: 0 0 20px #0ea5e9;
     }
 }
+/* Countdown */
+
+.countdown-section{
+    padding:50px 20px;
+    text-align:center;
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.countdown div{
+    width:120px;
+    background:#161b22;
+    border:2px solid #00e5ff;
+    border-radius:15px;
+    padding:20px;
+}
+
+.countdown h1{
+    color:#00e5ff;
+    font-size:40px;
+}
+
+.countdown p{
+    color:#bbb;
+}
