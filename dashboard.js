@@ -69,6 +69,33 @@ onAuthStateChanged(auth, async (user) => {
     }
 
 });
+// ---------------- LEADERBOARD ----------------
+
+async function loadLeaderboard() {
+
+    const leaderboardTable = document.getElementById("leaderboardTable");
+
+    leaderboardTable.innerHTML = "";
+
+    const snapshot = await getDocs(collection(db, "leaderboard"));
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        leaderboardTable.innerHTML += `
+        <tr>
+            <td>${data.rank}</td>
+            <td>${data.teamName}</td>
+            <td>${data.points}</td>
+        </tr>
+        `;
+
+    });
+
+}
+
+loadLeaderboard();
 
 // Logout
 const logoutBtn = document.getElementById("logoutBtn");
