@@ -147,3 +147,23 @@ form button{
 form button:hover{
     background:#ff6a00;
 }
+.stats-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin:20px 0;
+}
+
+.stat-card{
+background:#1f2937;
+color:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,.3);
+}
+
+.stat-card h2{
+font-size:35px;
+margin-top:10px;
+}
