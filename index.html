@@ -1,40 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eSportLegacy</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>eSports Legacy</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<header>
-  <nav class="navbar">
-    <h2 class="logo">🔥eSportLagacy</h2>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Tournaments</a></li>
-      <li><a href="register.html">Register</a></li>
-      <li><a href="#">Leaderboard</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<!-- NAVBAR -->
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>WELCOME TO eSportLagacy</h1>
-    <p>India's esports platform for Free Fire tournaments. Play, compete, and build your legacy.</p>
-    <a href="register.html" class="btn">Join Tournament</a>
-  </div>
+<nav class="navbar">
+
+<div class="logo">
+🏆 eSports Legacy
+</div>
+
+<ul>
+
+<li><a href="#home">Home</a></li>
+
+<li><a href="#tournaments">Tournaments</a></li>
+
+<li><a href="#leaderboard">Leaderboard</a></li>
+
+<li><a href="player-login.html">Player Login</a></li>
+
+<li><a href="admin-login.html">Admin</a></li>
+
+</ul>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<h1>India's Next Generation Esports Platform</h1>
+
+<p>
+
+Play • Compete • Win Cash Prizes
+
+</p>
+
+<a href="register.html">
+
+<button>
+
+Register Team
+
+</button>
+
+</a>
+
 </section>
-<section class="tournaments">
-    <h2>🏆 Upcoming Tournaments</h2>
 
-    <div class="card-container" id="tournamentList">
+<!-- STATS -->
+
+<section class="stats">
+
+<div class="stat">
+
+<h2 id="totalTournament">0</h2>
+
+<p>Tournaments</p>
+
+</div>
+
+<div class="stat">
+
+<h2 id="totalTeams">0</h2>
+
+<p>Teams</p>
+
+</div>
+
+<div class="stat">
+
+<h2>₹50,000+</h2>
+
+<p>Prize Pool</p>
+
 </div>
 
 </section>
-  <script type="module" src="tournaments.js"></script>
+
+<!-- TOURNAMENTS -->
+
+<section id="tournaments">
+
+<h2>🔥 Live Tournaments</h2>
+
+<div id="tournamentList" class="cards">
+
+</div>
+
+</section>
+
+<!-- LEADERBOARD -->
+
+<section id="leaderboard">
+
+<h2>🥇 Leaderboard</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Rank</th>
+
+<th>Team</th>
+
+<th>Kills</th>
+
+<th>Points</th>
+
+</tr>
+
+</thead>
+
+<tbody id="leaderboardTable">
+
+</tbody>
+
+</table>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+
+© 2026 eSports Legacy
+
+</p>
+
+</footer>
+
+<script type="module" src="script.js"></script>
+
 </body>
+
 </html>
