@@ -92,6 +92,24 @@ async function loadAnnouncement() {
     }
 
 }
+// ================= FEATURED TOURNAMENT =================
+
+async function loadFeaturedTournament() {
+
+    const snapshot = await getDocs(collection(db, "tournaments"));
+
+    if (snapshot.empty) return;
+
+    const data = snapshot.docs[0].data();
+
+    document.getElementById("featuredTitle").textContent = data.title;
+    document.getElementById("featuredDate").textContent = data.date;
+    document.getElementById("featuredEntry").textContent = data.entryFee;
+    document.getElementById("featuredPrize").textContent = data.prizePool;
+
+}
 loadTournaments();
 loadLeaderboard();
 loadTeamCount();
+loadAnnouncement();
+loadFeaturedTournament();
