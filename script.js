@@ -1,45 +1,85 @@
 import { db } from "./firebase.js";
 
 import {
-  collection,
-  addDoc,
-  serverTimestamp
+    collection,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const form = document.getElementById("registerForm");
+// ================= LOAD TOURNAMENTS =================
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+async function loadTournaments() {
 
-    const teamName = document.getElementById("teamName").value;
-    const captainName = document.getElementById("captainName").value;
-    const captainUID = document.getElementById("captainUID").value;
-    const mobile = document.getElementById("mobile").value;
-    const email = document.getElementById("email").value;
-    const tournamentTitle = document.getElementById("tournamentTitle").value;
-    const transactionId = document.getElementById("transactionId").value;
+    const tournamentList = document.getElementById("tournamentList");
+    tournamentList.innerHTML = "";
 
-    try {
+    const snapshot = await getDocs(collection(db, "tournaments"));
 
-        await addDoc(collection(db, "registrations"), {
-            teamName,
-            captainName,
-            captainUID,
-            mobile,
-            email,
-            tournamentTitle,
-            transactionId,
-            status: "Pending",
-            createdAt: serverTimestamp()
-        });
+    document.getElementById("totalTournament").textContent = snapshot.size;
 
-        alert("✅ Registration Successful!");
+    snapshot.forEach((doc) => {
 
-        form.reset();
+        const data = doc.data();
 
-    } catch (error) {
+        tournamentList.innerHTML += `
+        <div class="tournament-card">
 
-        alert("❌ Error: " + error.message);
+            <h3>${data.title}</h3>
 
-    }
-});
+            <p>📅 ${data.date}</p>
+
+            <p>💰 Entry Fee: ₹${data.entryFee}</p>
+
+            <p>🏆 Prize Pool: ₹${data.prizePool}</p>
+
+            <a href="register.html">
+                <button>Register</button>
+            </a>
+
+        </div>
+        `;
+    });
+}
+
+// ================= LOAD LEADERBOARD =================
+
+async function loadLeaderboard() {
+
+    const leaderboardTable = document.getElementById("leaderboardTable");
+    leaderboardTable.innerHTML = "";
+
+    const snapshot = await getDocs(collection(db, "leaderboard"));
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        leaderboardTable.innerHTML += `
+        <tr>
+
+            <td>${data.rank}</td>
+
+            <td>${data.teamName}</td>
+
+            <td>${data.kills}</td>
+
+            <td>${data.points}</td>
+
+        </tr>
+        `;
+    });
+}
+
+// ================= LOAD TEAM COUNT =================
+
+async function loadTeamCount() {
+
+    const snapshot = await getDocs(collection(db, "registrations"));
+
+    document.getElementById("totalTeams").textContent = snapshot.size;
+}
+
+// ================= START =================
+
+loadTournaments();
+loadLeaderboard();
+loadTeamCount();
