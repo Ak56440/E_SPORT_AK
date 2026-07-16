@@ -279,15 +279,20 @@ background:#111827;
 color:#bbb;
 }
 .announcement-bar{
-    background:#ff9800;
-    color:#111;
-    padding:12px;
-    text-align:center;
-    font-weight:bold;
-    animation:scrollGlow 2s infinite alternate;
+    background: #38bdf8; /* Sky Blue */
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    animation: scrollGlow 2s infinite alternate;
 }
 
 @keyframes scrollGlow{
-    from{box-shadow:0 0 5px orange;}
-    to{box-shadow:0 0 20px yellow;}
+    from{
+        box-shadow: 0 0 5px #38bdf8;
+    }
+    to{
+        box-shadow: 0 0 20px #0ea5e9;
+    }
 }
