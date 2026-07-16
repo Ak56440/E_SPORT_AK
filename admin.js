@@ -301,6 +301,25 @@ async function loadAnalytics() {
     document.getElementById("totalTournaments").textContent =
         tournaments.size;
 }
+const saveAnnouncement =
+document.getElementById("saveAnnouncement");
+
+if (saveAnnouncement) {
+
+    saveAnnouncement.addEventListener("click", async () => {
+
+        const text =
+        document.getElementById("announcementInput").value;
+
+        await setDoc(doc(db, "website", "announcement"), {
+            text: text
+        });
+
+        alert("✅ Announcement Updated!");
+
+    });
+
+}
 // ---------------- LOGOUT ----------------
 
 const logoutBtn = document.getElementById("logoutBtn");
