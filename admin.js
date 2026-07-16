@@ -270,6 +270,37 @@ window.rejectTeam = async function(id){
 
 loadTournaments();
 loadRegistrations();
+loadAnalytics();
+// ---------------- ADMIN ANALYTICS ----------------
+
+async function loadAnalytics() {
+
+    // Teams
+    const registrations = await getDocs(collection(db, "registrations"));
+
+    let totalTeams = 0;
+    let approved = 0;
+    let rejected = 0;
+
+    registrations.forEach((doc) => {
+        totalTeams++;
+
+        const data = doc.data();
+
+        if (data.status === "Approved") approved++;
+        if (data.status === "Rejected") rejected++;
+    });
+
+    document.getElementById("totalTeams").textContent = totalTeams;
+    document.getElementById("approvedTeams").textContent = approved;
+    document.getElementById("rejectedTeams").textContent = rejected;
+
+    // Tournaments
+    const tournaments = await getDocs(collection(db, "tournaments"));
+
+    document.getElementById("totalTournaments").textContent =
+        tournaments.size;
+}
 // ---------------- LOGOUT ----------------
 
 const logoutBtn = document.getElementById("logoutBtn");
