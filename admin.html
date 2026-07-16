@@ -3,40 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
+<title>Admin Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="form-container">
+<div class="container">
 
-<h1>🏆 Admin Panel</h1>
-<div class="stats-container">
+<h1>🏆 eSports Legacy Admin Dashboard</h1>
 
-    <div class="stat-card">
-        <h3>👥 Teams</h3>
-        <h2 id="totalTeams">0</h2>
-    </div>
+<!-- Analytics -->
 
-    <div class="stat-card">
-        <h3>🏆 Tournaments</h3>
-        <h2 id="totalTournaments">0</h2>
-    </div>
+<div class="cards">
 
-    <div class="stat-card">
-        <h3>✅ Approved</h3>
-        <h2 id="approvedTeams">0</h2>
-    </div>
+<div class="card">
+<h3>Total Teams</h3>
+<h2 id="totalTeams">0</h2>
+</div>
 
-    <div class="stat-card">
-        <h3>❌ Rejected</h3>
-        <h2 id="rejectedTeams">0</h2>
-    </div>
+<div class="card">
+<h3>Total Tournaments</h3>
+<h2 id="totalTournaments">0</h2>
+</div>
+
+<div class="card">
+<h3>Approved</h3>
+<h2 id="approvedTeams">0</h2>
+</div>
+
+<div class="card">
+<h3>Rejected</h3>
+<h2 id="rejectedTeams">0</h2>
+</div>
 
 </div>
 
 <hr>
+
 <h2>Create Tournament</h2>
 
 <form id="tournamentForm">
@@ -45,49 +49,49 @@
 
 <input type="date" id="date" required>
 
-<input type="number" id="entryFee" placeholder="Entry Fee (₹)" required>
+<input type="number" id="entryFee" placeholder="Entry Fee" required>
 
-<input type="number" id="prizePool" placeholder="Prize Pool (₹)" required>
+<input type="number" id="prizePool" placeholder="Prize Pool" required>
 
 <input type="text" id="roomId" placeholder="Room ID">
 
 <input type="text" id="roomPassword" placeholder="Room Password">
 
-<button type="submit">Create Tournament</button>
+<button type="submit">
+Create Tournament
+</button>
 
 </form>
 
 <hr>
 
-<h2>🏆 Tournament List</h2>
+<h2>Tournaments</h2>
 
-<table border="1" width="100%" cellpadding="10">
+<table>
 
 <thead>
 
 <tr>
 
-<th>Tournament</th>
+<th>Title</th>
 <th>Date</th>
-<th>Entry Fee</th>
-<th>Prize Pool</th>
-<th>Actions</th>
+<th>Entry</th>
+<th>Prize</th>
+<th>Action</th>
 
 </tr>
 
 </thead>
 
-<tbody id="tableBody">
-
-</tbody>
+<tbody id="tableBody"></tbody>
 
 </table>
 
 <hr>
 
-<h2>👥 Team Registrations</h2>
+<h2>Registrations</h2>
 
-<table border="1" width="100%" cellpadding="10">
+<table>
 
 <thead>
 
@@ -96,62 +100,66 @@
 <th>Team</th>
 <th>Captain</th>
 <th>Tournament</th>
-<th>Transaction ID</th>
 <th>Payment</th>
 <th>Status</th>
-<th>Actions</th>
+<th>Action</th>
 
 </tr>
 
 </thead>
 
-<tbody id="registrationTable">
-
-</tbody>
+<tbody id="registrationTable"></tbody>
 
 </table>
-    <hr>
 
-<h2>🥇 Leaderboard Manager</h2>
+<hr>
+
+<h2>Leaderboard</h2>
 
 <form id="leaderboardForm">
 
-    <input type="text" id="lbTeamName" placeholder="Team Name" required>
+<input id="lbTeamName" placeholder="Team Name" required>
 
-    <input type="number" id="lbKills" placeholder="Kills" required>
+<input id="lbKills" type="number" placeholder="Kills" required>
 
-    <input type="number" id="lbRank" placeholder="Rank" required>
+<input id="lbRank" type="number" placeholder="Rank" required>
 
-    <input type="number" id="lbPoints" placeholder="Points" required>
+<input id="lbPoints" type="number" placeholder="Points" required>
 
-    <button type="submit">
-        💾 Save Leaderboard
-    </button>
+<button type="submit">
+Save Leaderboard
+</button>
 
 </form>
 
 <br>
 
-<table border="1" width="100%" cellpadding="10">
+<table>
 
 <thead>
+
 <tr>
+
 <th>Team</th>
 <th>Kills</th>
 <th>Rank</th>
 <th>Points</th>
-<th>Action</th>
+<th>Delete</th>
+
 </tr>
+
 </thead>
 
-<tbody id="leaderboardAdminTable">
-
-</tbody>
+<tbody id="leaderboardAdminTable"></tbody>
 
 </table>
-<button id="logoutBtn" style="background:red;color:white;">
-    🚪 Logout
+
+<br>
+
+<button id="logoutBtn" class="logout">
+Logout
 </button>
+
 </div>
 
 <script type="module" src="admin.js"></script>
