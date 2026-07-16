@@ -80,7 +80,18 @@ async function loadTeamCount() {
 }
 
 // ================= START =================
+async function loadAnnouncement() {
 
+    const snap = await getDoc(doc(db, "website", "announcement"));
+
+    if (snap.exists()) {
+
+        document.getElementById("announcementText").textContent =
+            snap.data().text;
+
+    }
+
+}
 loadTournaments();
 loadLeaderboard();
 loadTeamCount();
