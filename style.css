@@ -156,3 +156,125 @@ form{
 }
 
 }
+/* ========= NAVBAR ========= */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:#111827;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#00e5ff;
+}
+
+.navbar ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.navbar a:hover{
+color:#00e5ff;
+}
+
+/* ========= HERO ========= */
+
+.hero{
+text-align:center;
+padding:100px 20px;
+background:linear-gradient(135deg,#111827,#0f172a);
+}
+
+.hero h1{
+font-size:50px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:22px;
+color:#ccc;
+margin-bottom:30px;
+}
+
+.hero button{
+padding:15px 40px;
+font-size:20px;
+}
+
+/* ========= STATS ========= */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:40px;
+}
+
+.stat{
+background:#161b22;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 0 12px rgba(0,229,255,.2);
+}
+
+.stat h2{
+font-size:40px;
+color:#00ff99;
+}
+
+/* ========= TOURNAMENT CARDS ========= */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+padding:20px;
+}
+
+.tournament-card{
+background:#161b22;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,229,255,.15);
+transition:.3s;
+}
+
+.tournament-card:hover{
+transform:translateY(-6px);
+box-shadow:0 0 18px cyan;
+}
+
+.tournament-card h3{
+margin-bottom:10px;
+color:#00e5ff;
+}
+
+.tournament-card p{
+margin:8px 0;
+}
+
+/* ========= FOOTER ========= */
+
+footer{
+text-align:center;
+padding:30px;
+margin-top:40px;
+background:#111827;
+color:#bbb;
+}
