@@ -51,6 +51,7 @@ tournamentForm.addEventListener("submit", async (e) => {
 
     const title = document.getElementById("title").value;
     const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
     const entryFee = document.getElementById("entryFee").value;
     const prizePool = document.getElementById("prizePool").value;
     const roomId = document.getElementById("roomId").value;
