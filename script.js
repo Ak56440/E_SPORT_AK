@@ -2,9 +2,10 @@ import { db } from "./firebase.js";
 
 import {
     collection,
-    getDocs
+    getDocs,
+    doc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 // ================= LOAD TOURNAMENTS =================
 
 async function loadTournaments() {
