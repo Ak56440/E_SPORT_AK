@@ -109,7 +109,7 @@ async function loadFeaturedTournament() {
     document.getElementById("featuredEntry").textContent = data.entryFee;
     document.getElementById("featuredPrize").textContent = data.prizePool;
 
-    startCountdown(new Date(data.date).getTime());
+   startCountdown(new Date(`${data.date}T${data.time}:00`).getTime());
 
 }
 
