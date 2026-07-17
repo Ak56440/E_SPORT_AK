@@ -29,11 +29,15 @@ form.addEventListener("submit", async (e) => {
 
         });
 
-        alert("🎉 Your team has been registered successfully!\n\nOur admin will verify your payment and approve your registration soon.");
+        document.getElementById("successPopup").style.display = "flex";
 
-        form.reset();
+form.reset();
 
-        window.location.href = "index.html";
+document.getElementById("okBtn").onclick = () => {
+
+    window.location.href = "index.html";
+
+};
 
     } catch (error) {
 
