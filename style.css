@@ -328,18 +328,20 @@ color:#bbb;
 }
 /* ===== Mobile Navigation ===== */
 
+/* ===== Professional Sliding Mobile Menu ===== */
+
 .menu-toggle{
     display:none;
-    font-size:30px;
-    cursor:pointer;
+    font-size:32px;
     color:white;
+    cursor:pointer;
+    z-index:1002;
 }
 
 @media (max-width:768px){
 
     .navbar{
         padding:15px 20px;
-        flex-wrap:wrap;
     }
 
     .menu-toggle{
@@ -347,22 +349,40 @@ color:#bbb;
     }
 
     .navbar ul{
-        display:none;
-        width:100%;
-        flex-direction:column;
+        position:fixed;
+        top:0;
+        right:-280px;
+        width:260px;
+        height:100vh;
         background:#111827;
-        margin-top:15px;
-        padding:15px 0;
-        border-radius:10px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:30px;
+        transition:right .4s ease;
+        z-index:1001;
+        box-shadow:-5px 0 20px rgba(0,0,0,.5);
     }
 
     .navbar ul.active{
-        display:flex;
+        right:0;
     }
 
     .navbar ul li{
-        text-align:center;
-        padding:10px;
+        list-style:none;
+    }
+
+    .navbar ul li a{
+        color:white;
+        font-size:22px;
+        text-decoration:none;
+        font-weight:bold;
+        transition:.3s;
+    }
+
+    .navbar ul li a:hover{
+        color:#00e5ff;
     }
 
 }
