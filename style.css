@@ -326,3 +326,43 @@ color:#bbb;
 .countdown p{
     color:#bbb;
 }
+/* ===== Mobile Navigation ===== */
+
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    cursor:pointer;
+    color:white;
+}
+
+@media (max-width:768px){
+
+    .navbar{
+        padding:15px 20px;
+        flex-wrap:wrap;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .navbar ul{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:#111827;
+        margin-top:15px;
+        padding:15px 0;
+        border-radius:10px;
+    }
+
+    .navbar ul.active{
+        display:flex;
+    }
+
+    .navbar ul li{
+        text-align:center;
+        padding:10px;
+    }
+
+}
