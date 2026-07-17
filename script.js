@@ -163,31 +163,40 @@ loadFeaturedTournament();
 
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
+const overlay = document.getElementById("overlay");
 
-if (menuToggle && navMenu) {
+if(menuToggle){
 
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click",()=>{
 
         navMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
 
-        if (navMenu.classList.contains("active")) {
-            menuToggle.innerHTML = "✖";
-        } else {
-            menuToggle.innerHTML = "☰";
+        if(navMenu.classList.contains("active")){
+            menuToggle.innerHTML="✖";
+        }else{
+            menuToggle.innerHTML="☰";
         }
 
     });
 
-    const navLinks = navMenu.querySelectorAll("a");
+    document.querySelectorAll("#navMenu a").forEach(link=>{
 
-    navLinks.forEach(link => {
-
-        link.addEventListener("click", () => {
+        link.addEventListener("click",()=>{
 
             navMenu.classList.remove("active");
-            menuToggle.innerHTML = "☰";
+            overlay.classList.remove("active");
+            menuToggle.innerHTML="☰";
 
         });
+
+    });
+
+    overlay.addEventListener("click",()=>{
+
+        navMenu.classList.remove("active");
+        overlay.classList.remove("active");
+        menuToggle.innerHTML="☰";
 
     });
 
