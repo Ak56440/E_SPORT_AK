@@ -2,348 +2,160 @@
 <html lang="en">
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>eSports Legacy</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eSports Legacy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+    <!-- NAVBAR -->
+    <nav class="navbar">
 
-<nav class="navbar">
+        <div class="logo">🏆 eSports Legacy</div>
 
-<div class="logo">
-🏆 eSports Legacy
-</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#tournaments">Tournaments</a></li>
+            <li><a href="#leaderboard">Leaderboard</a></li>
+            <li><a href="player-login.html">Player Login</a></li>
+            <li><a href="admin-login.html">Admin</a></li>
+        </ul>
 
-<ul>
+    </nav>
 
-<li><a href="#home">Home</a></li>
+    <!-- Announcement -->
+    <div class="announcement-bar">
+        📢 <span id="announcementText">Loading latest announcement...</span>
+    </div>
 
-<li><a href="#tournaments">Tournaments</a></li>
+    <!-- Featured Tournament -->
+    <section class="featured-tournament">
 
-<li><a href="#leaderboard">Leaderboard</a></li>
+        <h2>🔥 Featured Tournament</h2>
 
-<li><a href="player-login.html">Player Login</a></li>
+        <div class="featured-card">
 
-<li><a href="admin-login.html">Admin</a></li>
+            <h3 id="featuredTitle">Loading...</h3>
 
-</ul>
+            <p>📅 <span id="featuredDate">-</span></p>
 
-</nav>
-  <div class="announcement-bar">
-    📢 <span id="announcementText">Loading latest announcement...</span>
-</div>
+            <p>💰 Entry Fee: ₹<span id="featuredEntry">0</span></p>
 
-<!-- HERO -->
+            <p>🏆 Prize Pool: ₹<span id="featuredPrize">0</span></p>
 
-<section class="hero" id="home">
+            <a href="register.html">
+                <button>Register Now</button>
+            </a>
 
-<h1>India's Next Generation Esports Platform</h1>
+        </div>
 
-<p>
+    </section>
 
-Play • Compete • Win Cash Prizes
+    <!-- Countdown -->
+    <section class="countdown-section">
 
-</p>
+        <h2>⏳ Tournament Starts In</h2>
 
-<a href="register.html">
+        <div class="countdown">
 
-<button>
+            <div>
+                <h1 id="days">00</h1>
+                <p>Days</p>
+            </div>
 
-Register Team
+            <div>
+                <h1 id="hours">00</h1>
+                <p>Hours</p>
+            </div>
 
-</button>
+            <div>
+                <h1 id="minutes">00</h1>
+                <p>Minutes</p>
+            </div>
 
-</a>
+            <div>
+                <h1 id="seconds">00</h1>
+                <p>Seconds</p>
+            </div>
 
-</section>
+        </div>
 
-<!-- STATS -->
+    </section>
 
-<section class="stats">
+    <!-- HERO -->
+    <section class="hero" id="home">
 
-<div class="stat">
+        <h1>India's Next Generation Esports Platform</h1>
 
-<h2 id="totalTournament">0</h2>
-
-<p>Tournaments</p>
-
-</div>
-
-<div class="stat">
-
-<h2 id="totalTeams">0</h2>
-
-<p>Teams</p>
-
-</div>
-
-<div class="stat">
-
-<h2>₹50,000+</h2>
-
-<p>Prize Pool</p>
-
-</div>
-
-</section>
-
-<!-- TOURNAMENTS -->
-
-<body>
-
-<!-- NAVBAR -->
-
-<nav class="navbar">
-
-<div class="logo">
-🏆 eSports Legacy
-</div>
-
-<ul>
-
-<li><a href="#home">Home</a></li>
-
-<li><a href="#tournaments">Tournaments</a></li>
-
-<li><a href="#leaderboard">Leaderboard</a></li>
-
-<li><a href="player-login.html">Player Login</a></li>
-
-<li><a href="admin-login.html">Admin</a></li>
-
-</ul>
-
-</nav>
-  <div class="announcement-bar">
-    📢 <span id="announcementText">Loading latest announcement...</span>
-</div>
-<section class="featured-tournament">
-
-    <h2>🔥 Featured Tournament</h2>
-
-    <div class="featured-card">
-
-        <h3 id="featuredTitle">Loading...</h3>
-
-        <p>📅 <span id="featuredDate">-</span></p>
-
-        <p>💰 Entry Fee: ₹<span id="featuredEntry">0</span></p>
-
-        <p>🏆 Prize Pool: ₹<span id="featuredPrize">0</span></p>
+        <p>Play • Compete • Win Cash Prizes</p>
 
         <a href="register.html">
-            <button>Register Now</button>
+            <button>Register Team</button>
         </a>
 
-    </div>
+    </section>
 
-</section>
-  <section class="countdown-section">
+    <!-- Stats -->
+    <section class="stats">
 
-    <h2>⏳ Tournament Starts In</h2>
-
-    <div class="countdown">
-
-        <div>
-            <h1 id="days">00</h1>
-            <p>Days</p>
+        <div class="stat">
+            <h2 id="totalTournament">0</h2>
+            <p>Tournaments</p>
         </div>
 
-        <div>
-            <h1 id="hours">00</h1>
-            <p>Hours</p>
+        <div class="stat">
+            <h2 id="totalTeams">0</h2>
+            <p>Teams</p>
         </div>
 
-        <div>
-            <h1 id="minutes">00</h1>
-            <p>Minutes</p>
+        <div class="stat">
+            <h2>₹50,000+</h2>
+            <p>Prize Pool</p>
         </div>
 
-        <div>
-            <h1 id="seconds">00</h1>
-            <p>Seconds</p>
-        </div>
+    </section>
 
-    </div>
+    <!-- Tournaments -->
+    <section id="tournaments">
 
-</section>
-<!-- HERO -->
+        <h2>🔥 Live Tournaments</h2>
 
-<section class="hero" id="home">
+        <div id="tournamentList" class="cards"></div>
 
-<h1>India's Next Generation Esports Platform</h1>
+    </section>
 
-<p>
+    <!-- Leaderboard -->
+    <section id="leaderboard">
 
-Play • Compete • Win Cash Prizes
+        <h2>🥇 Leaderboard</h2>
 
-</p>
+        <table>
 
-<a href="register.html">
+            <thead>
 
-<button>
+                <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <th>Kills</th>
+                    <th>Points</th>
+                </tr>
 
-Register Team
+            </thead>
 
-</button>
+            <tbody id="leaderboardTable"></tbody>
 
-</a>
+        </table>
 
-</section>
+    </section>
 
-<!-- STATS -->
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 eSports Legacy</p>
+    </footer>
 
-<section class="stats">
-
-<div class="stat">
-
-<h2 id="totalTournament">0</h2>
-
-<p>Tournaments</p>
-
-</div>
-
-<div class="stat">
-
-<h2 id="totalTeams">0</h2>
-
-<p>Teams</p>
-
-</div>
-
-<div class="stat">
-
-<h2>₹50,000+</h2>
-
-<p>Prize Pool</p>
-
-</div>
-
-</section>
-
-<!-- TOURNAMENTS -->
-
-<section id="tournaments">
-
-<h2>🔥 Live Tournaments</h2>
-
-<div id="tournamentList" class="cards">
-
-</div>
-
-</section>
-
-<!-- LEADERBOARD -->
-
-<section id="leaderboard">
-
-<h2>🥇 Leaderboard</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Rank</th>
-
-<th>Team</th>
-
-<th>Kills</th>
-
-<th>Points</th>
-
-</tr>
-
-</thead>
-
-<tbody id="leaderboardTable">
-
-</tbody>
-
-</table>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-<p>
-
-© 2026 eSports Legacy
-
-</p>
-
-</footer>
-
-<script type="module" src="script.js"></script>
-
-</body>
-
-</html>  
-
-<h2>🔥 Live Tournaments</h2>
-
-<div id="tournamentList" class="cards">
-
-</div>
-
-</section>
-
-<!-- LEADERBOARD -->
-
-<section id="leaderboard">
-
-<h2>🥇 Leaderboard</h2>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Rank</th>
-
-<th>Team</th>
-
-<th>Kills</th>
-
-<th>Points</th>
-
-</tr>
-
-</thead>
-
-<tbody id="leaderboardTable">
-
-</tbody>
-
-</table>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-<p>
-
-© 2026 eSports Legacy
-
-</p>
-
-</footer>
-
-<script type="module" src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
 </body>
 
