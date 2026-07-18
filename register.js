@@ -25,8 +25,13 @@ form.addEventListener("submit", async (e) => {
             transactionId: document.getElementById("transactionId").value,
 
             status: "Pending",
-            createdAt: serverTimestamp()
 
+// 💎 Wallet
+diamonds: 0,
+totalTopup: 0,
+totalSpent: 0,
+
+createdAt: serverTimestamp()
         });
 
         document.getElementById("successPopup").style.display = "flex";
