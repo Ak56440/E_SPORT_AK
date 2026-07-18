@@ -34,7 +34,11 @@ onAuthStateChanged(auth, async (user) => {
         if (data.email === user.email) {
 
             found = true;
+document.getElementById("walletBalance").textContent =
+    data.diamonds || 0;
 
+document.getElementById("walletRupees").textContent =
+    data.diamonds || 0;
             document.getElementById("tournamentName").textContent =
                 data.tournamentTitle || "-";
 
@@ -96,6 +100,18 @@ async function loadLeaderboard() {
 }
 
 loadLeaderboard();
+// Wallet Top Up
+const topupBtn = document.getElementById("topupBtn");
+
+if (topupBtn) {
+
+    topupBtn.addEventListener("click", () => {
+
+        alert("💎 Wallet Top-Up system coming soon!");
+
+    });
+
+}
 
 // Logout
 const logoutBtn = document.getElementById("logoutBtn");
