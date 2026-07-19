@@ -7,7 +7,9 @@ import {
 
 import {
     collection,
-    getDocs
+    getDocs,
+    doc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
@@ -17,11 +19,25 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+
+if (userDoc.exists()) {
+
+    const userData = userDoc.data();
+
     document.getElementById("playerName").textContent =
-        user.displayName || "Player";
+        userData.name;
 
     document.getElementById("playerEmail").textContent =
-        user.email;
+        userData.email;
+
+    document.getElementById("walletBalance").textContent =
+        userData.diamonds || 0;
+
+    document.getElementById("walletRupees").textContent =
+        userData.diamonds || 0;
+
+}
 
     const snapshot = await getDocs(collection(db, "registrations"));
 
@@ -34,11 +50,7 @@ onAuthStateChanged(auth, async (user) => {
         if (data.email === user.email) {
 
             found = true;
-document.getElementById("walletBalance").textContent =
-    data.diamonds || 0;
 
-document.getElementById("walletRupees").textContent =
-    data.diamonds || 0;
             document.getElementById("tournamentName").textContent =
                 data.tournamentTitle || "-";
 
