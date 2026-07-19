@@ -6,7 +6,8 @@ createUserWithEmailAndPassword
 
 import {
 doc,
-setDoc
+setDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const form = document.getElementById("registerForm");
@@ -27,10 +28,29 @@ form.addEventListener("submit", async (e) => {
             password
         );
 
-        await setDoc(doc(db, "players", userCredential.user.uid), {
-            name,
-            email
-        });
+        import {
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+await setDoc(doc(db, "users", userCredential.user.uid), {
+
+    uid: userCredential.user.uid,
+
+    name: name,
+
+    email: email,
+
+    diamonds: 0,
+
+    totalTopup: 0,
+
+    totalSpent: 0,
+
+    createdAt: serverTimestamp()
+
+});
 
         alert("✅ Account Created Successfully!");
 
