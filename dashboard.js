@@ -152,9 +152,10 @@ if (topupBtn) {
 
             console.log(order);
 
-            // Razorpay Checkout will be added next
+           
             const options = {
-    key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay Key ID
+    key:"rzp_test_TF296VhkJz7kyX",
+        // Replace with your Razorpay Key ID
     amount: order.amount,
     currency: order.currency,
     name: "eSports Legacy",
