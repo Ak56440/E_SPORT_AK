@@ -117,9 +117,49 @@ const topupBtn = document.getElementById("topupBtn");
 
 if (topupBtn) {
 
-    topupBtn.addEventListener("click", () => {
+    topupBtn.addEventListener("click", async () => {
 
-        alert("💎 Wallet Top-Up system coming soon!");
+        const amount = Number(prompt("Enter Top-Up Amount (₹)"));
+
+        if (!amount || amount <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+        }
+
+        const user = auth.currentUser;
+
+        if (!user) {
+            alert("Please login first.");
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                "https://esports-legacy-api.onrender.com/api/payment/create-order",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        amount: amount
+                    })
+                }
+            );
+
+            const order = await response.json();
+
+            console.log(order);
+
+            // Razorpay Checkout will be added next
+
+        } catch (err) {
+
+            console.error(err);
+            alert("Unable to create payment order.");
+
+        }
 
     });
 
