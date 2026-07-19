@@ -153,6 +153,55 @@ if (topupBtn) {
             console.log(order);
 
             // Razorpay Checkout will be added next
+            const options = {
+    key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay Key ID
+    amount: order.amount,
+    currency: order.currency,
+    name: "eSports Legacy",
+    description: "Wallet Top-Up",
+    order_id: order.id,
+
+    handler: async function (response) {
+
+        const verify = await fetch(
+            "https://esports-legacy-api.onrender.com/api/payment/verify-payment",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+                    uid: user.uid,
+                    amount: amount
+                })
+            }
+        );
+
+        const result = await verify.json();
+
+        if (result.success) {
+            alert("✅ Wallet Top-Up Successful!");
+            location.reload();
+        } else {
+            alert("❌ Payment Verification Failed");
+        }
+    },
+
+    prefill: {
+        name: document.getElementById("playerName").textContent,
+        email: user.email
+    },
+
+    theme: {
+        color: "#0096ff"
+    }
+};
+
+const rzp = new Razorpay(options);
+rzp.open();
 
         } catch (err) {
 
