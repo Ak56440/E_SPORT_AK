@@ -10,6 +10,7 @@ router.post("/join", async (req, res) => {
         const {
             uid,
             tournamentId,
+            tournamentTitle,
             entryFee,
             teamName,
             captainName,
@@ -28,31 +29,54 @@ router.post("/join", async (req, res) => {
 
         const user = userDoc.data();
 
-        if ((user.diamonds || 0) < entryFee) {
+        // Check wallet balance
+        if ((user.diamonds || 0) < Number(entryFee)) {
             return res.status(400).json({
                 success: false,
                 message: "Insufficient wallet balance"
             });
         }
 
+        // Prevent duplicate registration
+        const existing = await db
+            .collection("registrations")
+            .where("uid", "==", uid)
+            .where("tournamentId", "==", tournamentId)
+            .get();
+
+        if (!existing.empty) {
+            return res.status(400).json({
+                success: false,
+                message: "You have already joined this tournament."
+            });
+        }
+
+        // Deduct wallet
         await userRef.update({
-            diamonds: user.diamonds - entryFee
+            diamonds: (user.diamonds || 0) - Number(entryFee),
+            totalSpent: (user.totalSpent || 0) + Number(entryFee)
         });
 
+        // Save registration
         await db.collection("registrations").add({
             uid,
             tournamentId,
+            tournamentTitle,
             teamName,
             captainName,
             email,
+            entryFee: Number(entryFee),
             status: "Pending",
             createdAt: new Date()
         });
 
+        // Save transaction
         await db.collection("transactions").add({
             uid,
-            amount: entryFee,
+            amount: Number(entryFee),
             type: "Tournament Entry",
+            tournamentId,
+            tournamentTitle,
             status: "Success",
             createdAt: new Date()
         });
