@@ -183,13 +183,13 @@ if (topupBtn) {
 
         const result = await verify.json();
 
-        if (result.success) {
-            alert("✅ Wallet Top-Up Successful!");
-            location.reload();
-        } else {
-            alert("❌ Payment Verification Failed");
-        }
-    },
+       if (result.success) {
+    alert("✅ Wallet Top-Up Successful!");
+    location.reload();
+} else {
+    console.log("Verification Result:", result);
+    alert(result.message || result.error || "Payment Verification Failed");
+}    },
 
     prefill: {
         name: document.getElementById("playerName").textContent,
