@@ -40,17 +40,26 @@ router.post("/verify-payment", async (req, res) => {
         } = req.body;
 
         const expectedSignature = crypto
-            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-            .update(razorpay_order_id + "|" + razorpay_payment_id)
-            .digest("hex");
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(razorpay_order_id + "|" + razorpay_payment_id)
+    .digest("hex");
 
-        if (expectedSignature !== razorpay_signature) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid Signature"
-            });
-        }
+console.log("Order ID:", razorpay_order_id);
+console.log("Payment ID:", razorpay_payment_id);
+console.log("Received Signature:", razorpay_signature);
+console.log("Expected Signature:", expectedSignature);
+console.log("UID:", uid);
+console.log("Amount:", amount);
 
+if (expectedSignature !== razorpay_signature) {
+    console.log("❌ Invalid Signature");
+
+    return res.status(400).json({
+        success: false,
+        message: "Invalid Signature"
+    });
+}
+           
         // Update Wallet
         const userRef = db.collection("users").doc(uid);
 
