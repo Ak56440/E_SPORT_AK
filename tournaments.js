@@ -26,7 +26,13 @@ async function loadTournaments() {
           <p>📅 ${t.date}</p>
           <p>💰 Prize: ₹${t.prizePool}</p>
           <p>🎟 Entry: ₹${t.entryFee}</p>
-          <a href="register.html" class="btn">Join Tournament</a>
+         <button
+    class="btn joinBtn"
+    data-id="${doc.id}"
+    data-title="${t.title}"
+    data-entry="${t.entryFee}">
+    Join Tournament
+</button>
         </div>
       `;
     });
@@ -38,3 +44,21 @@ async function loadTournaments() {
 }
 
 loadTournaments();
+document.addEventListener("click", (e) => {
+
+    if (!e.target.classList.contains("joinBtn")) return;
+
+    const tournament = {
+        id: e.target.dataset.id,
+        title: e.target.dataset.title,
+        entryFee: e.target.dataset.entry
+    };
+
+    localStorage.setItem(
+        "selectedTournament",
+        JSON.stringify(tournament)
+    );
+
+    window.location.href = "register.html";
+
+});
