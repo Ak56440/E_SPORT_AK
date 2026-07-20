@@ -1,4 +1,14 @@
 import { auth } from "./firebase.js";
+const tournament = JSON.parse(
+    localStorage.getItem("selectedTournament")
+);
+if (!tournament) {
+    alert("Please select a tournament first.");
+    window.location.href = "index.html";
+}
+if (tournament) {
+    document.getElementById("tournamentTitle").value = tournament.title;
+}
 
 const form = document.getElementById("registerForm");
 
@@ -15,8 +25,7 @@ form.addEventListener("submit", async (e) => {
             return;
         }
 
-        const entryFee = 100; // Change this to your tournament entry fee
-
+        const entryFee = Number(tournament.entryFee);
         const response = await fetch(
             "https://esports-legacy-api.onrender.com/api/tournament/join",
             {
@@ -26,7 +35,8 @@ form.addEventListener("submit", async (e) => {
                 },
                 body: JSON.stringify({
                     uid: user.uid,
-                    tournamentId: document.getElementById("tournamentTitle").value,
+                   tournamentId: tournament.id,
+tournamentTitle: tournament.title,
                     entryFee: entryFee,
                     teamName: document.getElementById("teamName").value,
                     captainName: document.getElementById("captainName").value,
