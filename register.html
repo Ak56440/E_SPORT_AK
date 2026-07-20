@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Team</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,61 +15,67 @@
 
     <form id="registerForm">
 
-        <input type="text" id="teamName" placeholder="Team Name" required>
-
-        <input type="text" id="captainName" placeholder="Captain Name" required>
-
-        <input type="text" id="captainUID" placeholder="Captain UID" required>
-
-        <input type="tel" id="mobile" placeholder="Mobile Number" required>
-
-        <input type="email" id="email" placeholder="Email Address" required>
-
         <input
-    type="text"
-    id="tournamentTitle"
-    placeholder="Tournament"
-    readonly
-    required>
-
-        <hr>
-
-<h3>💳 Payment Details</h3>
-
-<div style="text-align:center;">
-
-    <p><b>Entry Fee:</b> ₹120</p>
-
-    <img src="wappqr.jpeg"
-         alt="UPI QR Code"
-         style="width:220px;max-width:100%;border-radius:10px;">
-
-    <p><b>UPI ID:</b> 8010147648@axl</p>
-
-</div>
+            type="text"
+            id="teamName"
+            placeholder="Team Name"
+            required>
 
         <input
             type="text"
-            id="transactionId"
-            placeholder="Enter UPI Transaction ID"
+            id="captainName"
+            placeholder="Captain Name"
             required>
 
-        <button
-            type="button"
-            onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSdn30HOGmouzORwFkoq7ZTLUipnU4zpbR6LorJlB8-sYepxTg/viewform?usp=header','_blank')">
-            📸 Upload Payment Screenshot
-        </button>
+        <input
+            type="text"
+            id="captainUID"
+            placeholder="Captain UID"
+            required>
 
-        <p style="color:red;font-size:14px;">
-            Upload your payment screenshot in the Google Form, then return here and complete your registration.
-        </p>
+        <input
+            type="tel"
+            id="mobile"
+            placeholder="Mobile Number"
+            required>
 
-        <label>
-            <input type="checkbox" id="paymentDone" required>
-            I have uploaded my payment screenshot.
-        </label>
+        <input
+            type="email"
+            id="email"
+            placeholder="Email Address"
+            required>
 
-        <br><br>
+        <input
+            type="text"
+            id="tournamentTitle"
+            placeholder="Tournament"
+            readonly
+            required>
+
+        <hr>
+
+        <div class="wallet-box">
+
+            <h3>💎 Wallet Payment</h3>
+
+            <p>
+                <strong>Entry Fee:</strong>
+                <span id="entryFeeText">₹0</span>
+            </p>
+
+            <p>
+                <strong>Payment Method:</strong>
+                Wallet Balance
+            </p>
+
+            <p style="color:green;">
+                The entry fee will be deducted automatically from your wallet after you click
+                <strong>Register Team</strong>.
+            </p>
+
+        </div>
+
+        <br>
 
         <button type="submit">
             ✅ Register Team
@@ -77,6 +84,7 @@
     </form>
 
 </div>
+
 <div id="successPopup" class="success-popup">
 
     <div class="success-box">
@@ -86,16 +94,19 @@
         <p>
             Your team has been registered successfully.
             <br><br>
-            Our admin will verify your payment.
-            <br>
-            You will be notified after approval.
+            The tournament entry fee has been deducted from your wallet.
+            <br><br>
+            Please wait for admin approval.
         </p>
 
-        <button id="okBtn">OK</button>
+        <button id="okBtn">
+            OK
+        </button>
 
     </div>
 
 </div>
+
 <script type="module" src="register.js"></script>
 
 </body>
