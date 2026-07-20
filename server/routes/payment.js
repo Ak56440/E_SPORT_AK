@@ -108,5 +108,10 @@ router.post("/verify-payment", async (req, res) => {
     }
 
 });
-
+router.get("/test", (req, res) => {
+    res.json({
+        success: true,
+        message: "Payment routes are working"
+    });
+});
 export default router;
