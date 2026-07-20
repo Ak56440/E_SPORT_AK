@@ -58,7 +58,7 @@ document.addEventListener("click", (e) => {
         "selectedTournament",
         JSON.stringify(tournament)
     );
-
+console.log(tournament);
     window.location.href = "register.html";
 
 });
