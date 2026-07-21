@@ -1,16 +1,24 @@
 import { auth } from "./firebase.js";
-const tournament = JSON.parse(
-    localStorage.getItem("selectedTournament")
-);
+
+console.log("Register page loaded");
+
+const raw = localStorage.getItem("selectedTournament");
+console.log("Raw localStorage:", raw);
+
+const tournament = JSON.parse(raw);
+console.log("Tournament:", tournament);
+
 if (!tournament) {
     alert("Please select a tournament first.");
     window.location.href = "index.html";
 }
-if (tournament) {
-    document.getElementById("tournamentTitle").value = tournament.title;
+
+document.getElementById("tournamentTitle").value = tournament.title;
+
+const fee = document.getElementById("entryFeeText");
+if (fee) {
+    fee.textContent = "₹" + tournament.entryFee;
 }
-document.getElementById("entryFeeText").textContent =
-    "₹" + tournament.entryFee;
 const form = document.getElementById("registerForm");
 
 form.addEventListener("submit", async (e) => {
