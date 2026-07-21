@@ -9,7 +9,8 @@ if (!tournament) {
 if (tournament) {
     document.getElementById("tournamentTitle").value = tournament.title;
 }
-
+document.getElementById("entryFeeText").textContent =
+    "₹" + tournament.entryFee;
 const form = document.getElementById("registerForm");
 
 form.addEventListener("submit", async (e) => {
