@@ -33,15 +33,42 @@ async function loadTournaments() {
 
             <p>🏆 Prize Pool: ₹${data.prizePool}</p>
 
-            <a href="register.html">
-                <button>Register</button>
-            </a>
+            <button
+                class="joinBtn"
+                data-id="${docSnap.id}"
+                data-title="${data.title}"
+                data-entry="${data.entryFee}">
+                Register
+            </button>
 
         </div>
         `;
     });
-}
 
+    document.querySelectorAll(".joinBtn").forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            const tournament = {
+                id: btn.dataset.id,
+                title: btn.dataset.title,
+                entryFee: btn.dataset.entry
+            };
+
+            localStorage.setItem(
+                "selectedTournament",
+                JSON.stringify(tournament)
+            );
+
+            console.log("Saved:", tournament);
+
+            window.location.href = "register.html";
+
+        });
+
+    });
+
+}
 // ================= LOAD LEADERBOARD =================
 
 async function loadLeaderboard() {
