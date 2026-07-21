@@ -9,6 +9,46 @@ import {
 
 // ================= LOAD TOURNAMENTS =================
 
+async function loadFeaturedTournament() {
+
+    const snapshot = await getDocs(collection(db, "tournaments"));
+
+    if (snapshot.empty) return;
+
+    const docSnap = snapshot.docs[0];
+    const data = docSnap.data();
+
+    document.getElementById("featuredTitle").textContent = data.title;
+    document.getElementById("featuredDate").textContent = data.date;
+    document.getElementById("featuredEntry").textContent = data.entryFee;
+    document.getElementById("featuredPrize").textContent = data.prizePool;
+
+    if (data.time) {
+        startCountdown(new Date(`${data.date}T${data.time}:00`).getTime());
+    }
+
+    document.getElementById("featuredJoinBtn").addEventListener("click", () => {
+
+        const tournament = {
+            id: docSnap.id,
+            title: data.title,
+            entryFee: data.entryFee
+        };
+
+        localStorage.setItem(
+            "selectedTournament",
+            JSON.stringify(tournament)
+        );
+
+        console.log("Featured Saved:", tournament);
+
+        window.location.href = "register.html";
+
+    });
+
+}
+// ================= LOAD TOURNAMENTS =================
+
 async function loadTournaments() {
 
     const tournamentList = document.getElementById("tournamentList");
@@ -47,7 +87,7 @@ async function loadTournaments() {
 
     document.querySelectorAll(".joinBtn").forEach(btn => {
 
-        btn.addEventListener("click", () => {
+        btn.onclick = () => {
 
             const tournament = {
                 id: btn.dataset.id,
@@ -63,8 +103,7 @@ async function loadTournaments() {
             console.log("Saved:", tournament);
 
             window.location.href = "register.html";
-
-        });
+        };
 
     });
 
@@ -123,22 +162,6 @@ async function loadAnnouncement() {
 
 // ================= FEATURED TOURNAMENT =================
 
-async function loadFeaturedTournament() {
-
-    const snapshot = await getDocs(collection(db, "tournaments"));
-
-    if (snapshot.empty) return;
-
-    const data = snapshot.docs[0].data();
-
-    document.getElementById("featuredTitle").textContent = data.title;
-    document.getElementById("featuredDate").textContent = data.date;
-    document.getElementById("featuredEntry").textContent = data.entryFee;
-    document.getElementById("featuredPrize").textContent = data.prizePool;
-
-   startCountdown(new Date(`${data.date}T${data.time}:00`).getTime());
-
-}
 
 // ================= COUNTDOWN =================
 
@@ -181,11 +204,15 @@ function startCountdown(targetDate) {
 
 // ================= START =================
 
-loadTournaments();
-loadLeaderboard();
-loadTeamCount();
-loadAnnouncement();
-loadFeaturedTournament();
+window.addEventListener("DOMContentLoaded", async () => {
+
+    await loadFeaturedTournament();
+    await loadTournaments();
+    await loadLeaderboard();
+    await loadTeamCount();
+    await loadAnnouncement();
+
+});
 // ===== Mobile Menu =====
 
 const menuToggle = document.getElementById("menuToggle");
