@@ -37,20 +37,25 @@ router.post("/join", async (req, res) => {
             });
         }
 
-        // Prevent duplicate registration
-        const existing = await db
-            .collection("registrations")
-            .where("uid", "==", uid)
-            .where("tournamentId", "==", tournamentId)
-            .get();
+       // Debug logs
+console.log("UID:", uid);
+console.log("Tournament ID:", tournamentId);
 
-        if (!existing.empty) {
-            return res.status(400).json({
-                success: false,
-                message: "You have already joined this tournament."
-            });
-        }
+// Prevent duplicate registration
+const existing = await db
+    .collection("registrations")
+    .where("uid", "==", uid)
+    .where("tournamentId", "==", tournamentId)
+    .get();
 
+console.log("Duplicate documents found:", existing.size);
+
+if (!existing.empty) {
+    return res.status(400).json({
+        success: false,
+        message: "You have already joined this tournament."
+    });
+}
         // Deduct wallet
         await userRef.update({
             diamonds: (user.diamonds || 0) - Number(entryFee),
